@@ -1,0 +1,7 @@
+# depslib dependency file v1.0
+1568961894 source:d:\codeblocks\workspace\lee15\main.cpp
+	<iostream>
+	<vector>
+	<algorithm>
+	<map>
+
