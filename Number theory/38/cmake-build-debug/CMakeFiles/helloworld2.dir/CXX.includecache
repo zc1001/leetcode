@@ -1,0 +1,20 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/Users/zhangchao/workspaceForc++/helloworld2/main.cpp
+iostream
+-
+algorithm
+-
+vector
+-
+string.h
+-
+string
+-
+
