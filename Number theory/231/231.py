@@ -2,12 +2,11 @@ import  math
 import  copy
 
 #直接算
-# 执行用时 :104 ms, 在所有 python 提交中击败了33.77% 的用户
-# 内存消耗 :11.7 MB, 在所有 python 提交中击败了21.26%的用户
-
+# 执行用时 :20 ms, 在所有 python 提交中击败了83.08% 的用户
+# 内存消耗 :11.7 MB, 在所有 python 提交中击败了28.06%的用户
 
 class Solution(object):
-    def isPowerOfThree(self, n):
+    def isPowerOfTwo(self, n):
         """
         :type n: int
         :rtype: bool
@@ -17,12 +16,12 @@ class Solution(object):
         while n >=1 :
             if (n == 1):
                 return True
-            if(n%3 != 0 or n ==2 ):
-                print(n)
+            if(n%2 != 0 ):
+                #print(n)
                 return False
 
 
-            n = n // 3
+            n = n // 2
 
 
 
@@ -42,7 +41,7 @@ if __name__ == '__main__':
     t = "nagaram"
     #print(max(n[0:2]))
     p = Solution()
-    a = p.isPowerOfThree(27)
+    a = p.isPowerOfTwo(8)
 
 
 
