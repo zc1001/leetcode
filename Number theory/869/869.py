@@ -4,8 +4,8 @@ import operator
 from itertools import permutations
 
 
-# 执行用时 :28 ms, 在所有 python 提交中击败了66.13% 的用户
-# 内存消耗 :11.7 MB, 在所有 python 提交中击败了13.79%的用户
+# 执行用时 :24 ms, 在所有 python 提交中击败了82.14% 的用户
+# 内存消耗 :11.9 MB, 在所有 python 提交中击败了5.55%的用户
 
 
 import string
@@ -142,6 +142,36 @@ from sklearn.neighbors import KNeighborsClassifier
 #             ans += max(col, R - col) * 2 ** (C - 1 - c)
 #         return ans
 
+class Solution(object):
+    def str_sort(self,s=''):
+        if len(s) <= 1:
+            return [s]
+        str_list = []
+        for i in range(len(s)):
+            for j in self.str_sort(s[0:i] + s[i + 1:]):
+                str_list.append(s[i] + j)
+        return str_list
+    def reorderedPowerOf2(self, N):
+        """
+        :type N: int
+        :rtype: bool
+        """
+        o = ['1', '2', '4', '8', '16', '32', '64', '128', '256', '512', '1024', '2048', '4096', '8192', '16384', '32768', '65536', '131072', '262144', '524288', '1048576', '2097152', '4194304', '8388608', '16777216', '33554432', '67108864', '134217728', '268435456', '536870912', '1073741824']
+        s = str(N)
+        for i in range(len(o)):
+            f = True
+            if(len(s) != len(o[i])):
+                continue
+            for j in range(len(s)):
+                if(o[i].find(s[j]) == -1):
+                    f = False
+                    break
+                else:
+                    o[i] = o[i].replace(s[j],'a',1)
+                    #print(o[i])
+            if(f and len(s) == len(o[i])):
+                return True
+        return False
 
 
 
@@ -149,6 +179,17 @@ from sklearn.neighbors import KNeighborsClassifier
 
 
 if __name__ == '__main__':
+    # iris = datasets.load_iris()
+    # data = iris.data
+    # target = iris.target
+    # dat1 = np.array(data)
+    # label = np.array(target)
+    # np.savetxt('D:\DataFusion\DataFusion\网络数据集\iris\data.txt', dat1, fmt='%0.3f')
+    # np.savetxt('D:\DataFusion\DataFusion\网络数据集\iris\label.txt',label,fmt='%0.0f')
+    l = []
+    for i in range(31):
+        l.append(str(2**i))
+    print(l)
 
     # A = [[0,0,1,1],[1,0,1,0],[1,1,0,0]]
     # B = [[1, 5], [8, 12], [15, 24], [25, 26]]
@@ -159,55 +200,55 @@ if __name__ == '__main__':
     #
     # a = p.matrixScore(A)
     # print(a)
-    import numpy as np
-    from sklearn import datasets
-    from sklearn.model_selection import train_test_split
-    from sklearn.model_selection import GridSearchCV
-    from sklearn.preprocessing import StandardScaler
-    from sklearn.neighbors import KNeighborsClassifier
-
-    # 加载 sklearn 中的 datasets 数据中的digits（手写字体数据）
-
-    digits = datasets.load_digits()
-    x = digits.data
-    y = digits.target
-
-    # 使用 train_test_split 进行模型建立和测试的分离,加zhiqian是因为没有进行
-    # 归一化处理
-
-    X_train_zhiqian, X_test_zhiqian, y_train, y_test = train_test_split(x, y, test_size=0.2)
-
-    # 使用 StandardScaler进行归一化处理
-    """为什么使用X_train_zhiqian进行归一化处理的均值和方差进行对X_test的归一化呢？
-    是因为要服从现实情况，如果只有一个数据进行预测，就没有办法得出均值和方差
-    """
-
-    s = StandardScaler()
-    s.fit(X_train_zhiqian)
-    X_train = s.transform(X_train_zhiqian)
-    X_test = s.transform(X_test_zhiqian)
-
-    knn_clf = KNeighborsClassifier()
-    # 使用网格搜索的方法进行对超参数的选取
-    # 超参数是指在算法进行时对不确定的参数进行调整以使得算法的预测准确率最高
-    params = [
-        {"weights": ["uniform"],
-         "n_neighbors": [k for k in range(1, 11)]
-         },
-        {"weights": ["distance"],
-         "n_neighbors": [k for k in range(1, 11)],
-         "p": [k for k in range(1, 6)]
-         }
-    ]
-
-    # n_jobs 这个参数是使用计算机的几个核，赋值为-1表示全都使用
-
-    gridsearch = GridSearchCV(knn_clf, params, n_jobs=-1)
-    gridsearch.fit(X_train, y_train)
-    print("best_score", gridsearch.best_score_)
-    print("best_params", gridsearch.best_params_)
-
-    # 将最好的赋值给knn_clf
-    knn_clf = gridsearch.best_estimator_
-
-    print(knn_clf.score(X_test, y_test))
+    # import numpy as np
+    # from sklearn import datasets
+    # from sklearn.model_selection import train_test_split
+    # from sklearn.model_selection import GridSearchCV
+    # from sklearn.preprocessing import StandardScaler
+    # from sklearn.neighbors import KNeighborsClassifier
+    #
+    # # 加载 sklearn 中的 datasets 数据中的digits（手写字体数据）
+    #
+    # digits = datasets.load_digits()
+    # x = digits.data
+    # y = digits.target
+    #
+    # # 使用 train_test_split 进行模型建立和测试的分离,加zhiqian是因为没有进行
+    # # 归一化处理
+    #
+    # X_train_zhiqian, X_test_zhiqian, y_train, y_test = train_test_split(x, y, test_size=0.2)
+    #
+    # # 使用 StandardScaler进行归一化处理
+    # """为什么使用X_train_zhiqian进行归一化处理的均值和方差进行对X_test的归一化呢？
+    # 是因为要服从现实情况，如果只有一个数据进行预测，就没有办法得出均值和方差
+    # """
+    #
+    # s = StandardScaler()
+    # s.fit(X_train_zhiqian)
+    # X_train = s.transform(X_train_zhiqian)
+    # X_test = s.transform(X_test_zhiqian)
+    #
+    # knn_clf = KNeighborsClassifier()
+    # # 使用网格搜索的方法进行对超参数的选取
+    # # 超参数是指在算法进行时对不确定的参数进行调整以使得算法的预测准确率最高
+    # params = [
+    #     {"weights": ["uniform"],
+    #      "n_neighbors": [k for k in range(1, 11)]
+    #      },
+    #     {"weights": ["distance"],
+    #      "n_neighbors": [k for k in range(1, 11)],
+    #      "p": [k for k in range(1, 6)]
+    #      }
+    # ]
+    #
+    # # n_jobs 这个参数是使用计算机的几个核，赋值为-1表示全都使用
+    #
+    # gridsearch = GridSearchCV(knn_clf, params, n_jobs=-1)
+    # gridsearch.fit(X_train, y_train)
+    # print("best_score", gridsearch.best_score_)
+    # print("best_params", gridsearch.best_params_)
+    #
+    # # 将最好的赋值给knn_clf
+    # knn_clf = gridsearch.best_estimator_
+    #
+    # print(knn_clf.score(X_test, y_test))
